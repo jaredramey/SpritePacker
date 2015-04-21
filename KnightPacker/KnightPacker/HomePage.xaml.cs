@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 
+
 namespace KnightPacker
 {
     /// <summary>
@@ -21,9 +22,12 @@ namespace KnightPacker
     /// </summary>
     public partial class HomePage : Page
     {
+        ObservableCollection<string> FilePaths = new ObservableCollection<string>();
+
         public HomePage()
         {
             InitializeComponent();
+            ImageListBox.ItemsSource = FilePaths;
         }
 
         private void Browser_Click(object sender, RoutedEventArgs e)
@@ -38,8 +42,23 @@ namespace KnightPacker
             if (result == true)
             {
                 //do stuff
-                string filename = dlg.FileName;
+                FilePaths.Add(dlg.FileName); 
             }
+        }
+
+        private void Previewer_Click(object sender, RoutedEventArgs e)
+        {
+            ImageControl.Source = new BitmapImage(new Uri(ImageListBox.SelectedItem.ToString()));
+        }
+
+        private void SpritePrev_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SpriteCreate_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
         

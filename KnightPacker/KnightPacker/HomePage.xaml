@@ -23,22 +23,25 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Column="0" Margin="5,10,15,144">Files Selected</Label>
+        <Label Grid.Column="0" Margin="5,10,15,144">Files Selected:</Label>
 
-        <ListBox Name="ImageListBox" Grid.Column="0" Grid.Row="0" Margin="10,38,44,72" Grid.RowSpan="3">
-            
-        </ListBox>
+        <ListBox Name="ImageListBox" Grid.Column="0" Grid.Row="0" Margin="10,38,44,10"/>
 
-        <Button Grid.Column="0" Grid.Row="2" Name="Browser" Margin="10,136,44,12" Click="Browser_Click">Select Files</Button>
+        <Button Grid.Column="0" Name="Browser" Margin="10,0,44,148" Click="Browser_Click" Grid.Row="2">Select Files</Button>
 
-        <TabControl Grid.RowSpan="3" Margin="204,15,10,10" Grid.ColumnSpan="2">
-            <TabItem Header="Sprites">
+        <Button Grid.Column="0" Name="Previewer" Margin="10,48,44,100" Click="Previewer_Click" Grid.Row="2">Preview Image</Button>
+
+        <Button Grid.Column="0" Name="SpritePrev" Margin="10,100,44,48" Click="SpritePrev_Click" Grid.Row="2">Preview Sprite Sheet</Button>
+
+        <Button Grid.Column="0" Name="SpriteCreate" Margin="10,148,44,0" Click="SpriteCreate_Click" Grid.Row="2">Create Sprite Sheet</Button>
+        <TabControl Grid.RowSpan="3" Margin="204,15,10,0" Grid.ColumnSpan="2">
+            <TabItem Header="Image Preview">
                 <Grid>
-                    
+                    <Image Name="ImageControl" Stretch="Fill" Margin="10"/>
                 </Grid>
             </TabItem>
 
-            <TabItem Header="Sprite Sheet">
+            <TabItem Header="Sprite Sheet Preview">
                 <Grid>
 
                 </Grid>
