@@ -14,3 +14,6 @@ C:\Users\jared.ramey\Documents\GitHub\SpritePacker\KnightPacker\KnightPacker\bin
 C:\Users\jared.ramey\Documents\GitHub\SpritePacker\KnightPacker\KnightPacker\obj\Debug\KnightPacker.exe
 C:\Users\jared.ramey\Documents\GitHub\SpritePacker\KnightPacker\KnightPacker\obj\Debug\KnightPacker.pdb
 C:\Users\jared.ramey\Documents\GitHub\SpritePacker\KnightPacker\KnightPacker\obj\Debug\App.baml
+C:\Users\jared.ramey\Documents\GitHub\SpritePacker\KnightPacker\KnightPacker\bin\Debug\WriteableBitmapEx.Wpf.dll
+C:\Users\jared.ramey\Documents\GitHub\SpritePacker\KnightPacker\KnightPacker\bin\Debug\WriteableBitmapEx.Wpf.pdb
+C:\Users\jared.ramey\Documents\GitHub\SpritePacker\KnightPacker\KnightPacker\bin\Debug\WriteableBitmapEx.Wpf.xml

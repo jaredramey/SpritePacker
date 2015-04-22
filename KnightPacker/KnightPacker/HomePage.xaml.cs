@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using System.IO;
 
 
 namespace KnightPacker
@@ -23,6 +24,9 @@ namespace KnightPacker
     public partial class HomePage : Page
     {
         ObservableCollection<string> FilePaths = new ObservableCollection<string>();
+        int prevWidth;
+        int prevHeight;
+        
 
         public HomePage()
         {
@@ -48,19 +52,74 @@ namespace KnightPacker
 
         private void Previewer_Click(object sender, RoutedEventArgs e)
         {
-            ImageControl.Source = new BitmapImage(new Uri(ImageListBox.SelectedItem.ToString()));
+            if(ImageListBox.SelectedItems.Count == 1)
+            {
+                ImageControl.Source = new BitmapImage(new Uri(ImageListBox.SelectedItem.ToString()));
+            }
         }
 
         private void SpritePrev_Click(object sender, RoutedEventArgs e)
         {
-
+            CreateSpriteSheet();
         }
 
         private void SpriteCreate_Click(object sender, RoutedEventArgs e)
         {
-
+            CreateSpriteSheet();
+            SaveSpriteSheet();
         }
 
-        
+        private void CreateSpriteSheet()
+        {
+            for (int i = 0; i < FilePaths.Count; i++ )
+            {
+                using(var stream = new FileStream(FilePaths[i].ToString(), FileMode.Open, FileAccess.Read, FileShare.Read))
+                {
+                    var bitmapFrame = BitmapFrame.Create(stream, BitmapCreateOptions.DelayCreation, BitmapCacheOption.None);
+                    var width = bitmapFrame.PixelWidth;
+                    var height = bitmapFrame.PixelHeight;
+
+                    Rectangle testRectangle = new Rectangle();
+                    testRectangle.Width = width;
+                    testRectangle.Height = height;
+
+                    ImageBrush myBrush = new ImageBrush();
+                    myBrush.ImageSource = new BitmapImage(new Uri(@FilePaths[i].ToString(), UriKind.Relative));
+
+                    testRectangle.Fill = myBrush;
+
+                    if(i == 0)
+                    {
+                        Canvas.SetLeft(testRectangle,0);
+                        SpriteSheet.Children.Add(testRectangle);
+                        prevWidth = width+10;
+                        prevHeight = height+10;
+                    }
+                    else 
+                    {
+                        if(prevWidth < SpriteSheet.Width)
+                        {  
+                            Canvas.SetLeft(testRectangle, prevWidth);
+                            SpriteSheet.Children.Add(testRectangle);
+                            prevWidth += width + 10;
+                        }
+
+                        else
+                        {
+                            Canvas.SetTop(testRectangle, prevHeight);
+                            SpriteSheet.Children.Add(testRectangle);
+                            prevHeight += height + 10;
+                            prevWidth = 0;
+                        }
+                        
+                    }
+                }
+            }
+        }
+
+        private void SaveSpriteSheet()
+        {
+
+        }
     }
 }

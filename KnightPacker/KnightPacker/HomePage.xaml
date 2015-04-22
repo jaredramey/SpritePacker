@@ -43,7 +43,11 @@
 
             <TabItem Header="Sprite Sheet Preview">
                 <Grid>
-
+                    <Canvas Name="SpriteSheet" Width="548">
+                        
+                    </Canvas>
+                    
+                    <Image Name="SpriteSheetImage"/>
                 </Grid>
             </TabItem>
         </TabControl>
