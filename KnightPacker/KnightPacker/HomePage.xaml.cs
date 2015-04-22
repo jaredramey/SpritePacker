@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using System.IO;
+using Microsoft.Win32;
 
 
 namespace KnightPacker
@@ -23,7 +24,8 @@ namespace KnightPacker
     /// </summary>
     public partial class HomePage : Page
     {
-        WriteableBitmap writablebitmap = BitmapFactory.New(512, 512);
+        List<WriteableBitmap> Images { set; get; }
+        WriteableBitmap FinalImage { set; get; }
         ObservableCollection<string> FilePaths = new ObservableCollection<string>();
         int prevWidth;
         int prevHeight;
@@ -33,8 +35,10 @@ namespace KnightPacker
         {
             InitializeComponent();
             ImageListBox.ItemsSource = FilePaths;
-            SpriteSheetImage.Source= writablebitmap;
-            writablebitmap.GetBitmapContext();
+            SpriteSheetImage.Source = FinalImage;
+            //FinalImage.GetBitmapContext();
+            Images = new List<WriteableBitmap>();
+            UpdateImageDisplay();
         }
 
         private void Browser_Click(object sender, RoutedEventArgs e)
@@ -75,54 +79,9 @@ namespace KnightPacker
         private void CreateSpriteSheet()
         {
             //Canvas drawing code
-            for (int i = 0; i < FilePaths.Count; i++ )
-            {
-                using(var stream = new FileStream(FilePaths[i].ToString(), FileMode.Open, FileAccess.Read, FileShare.Read))
-                {
-                    var bitmapFrame = BitmapFrame.Create(stream, BitmapCreateOptions.DelayCreation, BitmapCacheOption.None);
-                    var width = bitmapFrame.PixelWidth;
-                    var height = bitmapFrame.PixelHeight;
-
-                    Rectangle testRectangle = new Rectangle();
-                    testRectangle.Width = width;
-                    testRectangle.Height = height;
-
-                    ImageBrush myBrush = new ImageBrush();
-                    myBrush.ImageSource = new BitmapImage(new Uri(@FilePaths[i].ToString(), UriKind.Relative));
-
-                    testRectangle.Fill = myBrush;
-
-                    if(i == 0)
-                    {
-                        Canvas.SetLeft(testRectangle,0);
-                        SpriteSheet.Children.Add(testRectangle);
-                        prevWidth = width+10;
-                        prevHeight = height+10;
-                    }
-                    else 
-                    {
-                        if(prevWidth < SpriteSheet.Width)
-                        {  
-                            Canvas.SetLeft(testRectangle, prevWidth);
-                            SpriteSheet.Children.Add(testRectangle);
-                            prevWidth += width + 10;
-                        }
-
-                        else
-                        {
-                            Canvas.SetTop(testRectangle, prevHeight);
-                            SpriteSheet.Children.Add(testRectangle);
-                            prevHeight += height + 10;
-                            prevWidth = 0;
-                        }
-                        
-                    }
-                }
-            }
-
-            //for (int i = 0; i < FilePaths.Count; i++)
+            //for (int i = 0; i < FilePaths.Count; i++ )
             //{
-            //    using (var stream = new FileStream(FilePaths[i].ToString(), FileMode.Open, FileAccess.Read, FileShare.Read))
+            //    using(var stream = new FileStream(FilePaths[i].ToString(), FileMode.Open, FileAccess.Read, FileShare.Read))
             //    {
             //        var bitmapFrame = BitmapFrame.Create(stream, BitmapCreateOptions.DelayCreation, BitmapCacheOption.None);
             //        var width = bitmapFrame.PixelWidth;
@@ -132,14 +91,112 @@ namespace KnightPacker
             //        testRectangle.Width = width;
             //        testRectangle.Height = height;
 
-            //        writablebitmap = BitmapFactory.New(1, 1).FromResource(FilePaths[i]);
+            //        ImageBrush myBrush = new ImageBrush();
+            //        myBrush.ImageSource = new BitmapImage(new Uri(@FilePaths[i].ToString(), UriKind.Relative));
+
+            //        testRectangle.Fill = myBrush;
+
+            //        if(i == 0)
+            //        {
+            //            Canvas.SetLeft(testRectangle,0);
+            //            SpriteSheet.Children.Add(testRectangle);
+            //            prevWidth = width+10;
+            //            prevHeight = height+10;
+            //        }
+            //        else 
+            //        {
+            //            if(prevWidth < SpriteSheet.Width)
+            //            {  
+            //                Canvas.SetLeft(testRectangle, prevWidth);
+            //                SpriteSheet.Children.Add(testRectangle);
+            //                prevWidth += width + 10;
+            //            }
+
+            //            else
+            //            {
+            //                Canvas.SetTop(testRectangle, prevHeight);
+            //                SpriteSheet.Children.Add(testRectangle);
+            //                prevHeight += height + 10;
+            //                prevWidth = 0;
+            //            }
+                        
+            //        }
             //    }
             //}
+
+            for (int i = 0; i < FilePaths.Count; i++)
+            {
+                FileStream stream = null;
+                try
+                {
+                    stream = new FileStream(FilePaths[i].ToString(), FileMode.Open, FileAccess.Read, FileShare.Read);
+                    WriteableBitmap loadedImage = BitmapFactory.New(1, 1).FromStream(stream);
+                    Images.Add(loadedImage);
+                }
+                catch( Exception e ) {
+                    MessageBox.Show("ERROR");
+                }
+                finally {
+                    if (stream != null)
+                    {
+                        stream.Close();
+                    }
+                    UpdateImageDisplay();
+                }
+            }
+        }
+
+        private void UpdateImageDisplay()
+        {
+            int pix_Width = 0;
+            int pix_Height = 0;
+
+            foreach(WriteableBitmap image in Images)
+            {
+                pix_Width += image.PixelWidth;
+                if(pix_Height < image.PixelHeight)
+                {
+                    pix_Height = image.PixelHeight;
+                }
+            }
+
+            FinalImage = BitmapFactory.New(pix_Width, pix_Height);
+
+            int pix_x = 0;
+            int pix_y = 0;
+
+            foreach(WriteableBitmap image in Images)
+            {
+                Rect imageRect = new Rect(pix_x, pix_y, image.PixelWidth, image.PixelHeight);
+                FinalImage.Blit(imageRect, image, new Rect(0, 0, image.PixelWidth, image.PixelHeight));
+                if(pix_x+pix_Width >= 548)
+                {
+                    pix_x = 0;
+                    pix_y += pix_Height;
+                }
+                else
+                {
+                    pix_x += image.PixelWidth+10;
+                }
+            }
+
+            SpriteSheetImage.Source = FinalImage;
+
         }
 
         private void SaveSpriteSheet()
         {
+            SaveFileDialog saveFile = new SaveFileDialog();
 
+            if(saveFile.ShowDialog() == true)
+            {
+                PngBitmapEncoder encoder = new PngBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(FinalImage));
+
+                FileStream filestream = new FileStream(saveFile.FileName, FileMode.Create);
+                encoder.Save(filestream);
+                filestream.Close();
+            }
         }
     }
 }
