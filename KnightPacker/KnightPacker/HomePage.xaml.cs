@@ -23,6 +23,7 @@ namespace KnightPacker
     /// </summary>
     public partial class HomePage : Page
     {
+        WriteableBitmap writablebitmap = BitmapFactory.New(512, 512);
         ObservableCollection<string> FilePaths = new ObservableCollection<string>();
         int prevWidth;
         int prevHeight;
@@ -32,6 +33,8 @@ namespace KnightPacker
         {
             InitializeComponent();
             ImageListBox.ItemsSource = FilePaths;
+            SpriteSheetImage.Source= writablebitmap;
+            writablebitmap.GetBitmapContext();
         }
 
         private void Browser_Click(object sender, RoutedEventArgs e)
@@ -71,6 +74,7 @@ namespace KnightPacker
 
         private void CreateSpriteSheet()
         {
+            //Canvas drawing code
             for (int i = 0; i < FilePaths.Count; i++ )
             {
                 using(var stream = new FileStream(FilePaths[i].ToString(), FileMode.Open, FileAccess.Read, FileShare.Read))
@@ -115,6 +119,22 @@ namespace KnightPacker
                     }
                 }
             }
+
+            //for (int i = 0; i < FilePaths.Count; i++)
+            //{
+            //    using (var stream = new FileStream(FilePaths[i].ToString(), FileMode.Open, FileAccess.Read, FileShare.Read))
+            //    {
+            //        var bitmapFrame = BitmapFrame.Create(stream, BitmapCreateOptions.DelayCreation, BitmapCacheOption.None);
+            //        var width = bitmapFrame.PixelWidth;
+            //        var height = bitmapFrame.PixelHeight;
+
+            //        Rectangle testRectangle = new Rectangle();
+            //        testRectangle.Width = width;
+            //        testRectangle.Height = height;
+
+            //        writablebitmap = BitmapFactory.New(1, 1).FromResource(FilePaths[i]);
+            //    }
+            //}
         }
 
         private void SaveSpriteSheet()
