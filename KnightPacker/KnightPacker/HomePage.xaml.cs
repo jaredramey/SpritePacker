@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using System.IO;
 using Microsoft.Win32;
+using System.Xml;
 
 
 namespace KnightPacker
@@ -72,58 +73,12 @@ namespace KnightPacker
 
         private void SpriteCreate_Click(object sender, RoutedEventArgs e)
         {
-            CreateSpriteSheet();
+            //CreateSpriteSheet();
             SaveSpriteSheet();
         }
 
         private void CreateSpriteSheet()
         {
-            //Canvas drawing code
-            //for (int i = 0; i < FilePaths.Count; i++ )
-            //{
-            //    using(var stream = new FileStream(FilePaths[i].ToString(), FileMode.Open, FileAccess.Read, FileShare.Read))
-            //    {
-            //        var bitmapFrame = BitmapFrame.Create(stream, BitmapCreateOptions.DelayCreation, BitmapCacheOption.None);
-            //        var width = bitmapFrame.PixelWidth;
-            //        var height = bitmapFrame.PixelHeight;
-
-            //        Rectangle testRectangle = new Rectangle();
-            //        testRectangle.Width = width;
-            //        testRectangle.Height = height;
-
-            //        ImageBrush myBrush = new ImageBrush();
-            //        myBrush.ImageSource = new BitmapImage(new Uri(@FilePaths[i].ToString(), UriKind.Relative));
-
-            //        testRectangle.Fill = myBrush;
-
-            //        if(i == 0)
-            //        {
-            //            Canvas.SetLeft(testRectangle,0);
-            //            SpriteSheet.Children.Add(testRectangle);
-            //            prevWidth = width+10;
-            //            prevHeight = height+10;
-            //        }
-            //        else 
-            //        {
-            //            if(prevWidth < SpriteSheet.Width)
-            //            {  
-            //                Canvas.SetLeft(testRectangle, prevWidth);
-            //                SpriteSheet.Children.Add(testRectangle);
-            //                prevWidth += width + 10;
-            //            }
-
-            //            else
-            //            {
-            //                Canvas.SetTop(testRectangle, prevHeight);
-            //                SpriteSheet.Children.Add(testRectangle);
-            //                prevHeight += height + 10;
-            //                prevWidth = 0;
-            //            }
-                        
-            //        }
-            //    }
-            //}
-
             for (int i = 0; i < FilePaths.Count; i++)
             {
                 FileStream stream = null;
@@ -169,15 +124,8 @@ namespace KnightPacker
             {
                 Rect imageRect = new Rect(pix_x, pix_y, image.PixelWidth, image.PixelHeight);
                 FinalImage.Blit(imageRect, image, new Rect(0, 0, image.PixelWidth, image.PixelHeight));
-                if(pix_x+pix_Width >= 548)
-                {
-                    pix_x = 0;
-                    pix_y += pix_Height;
-                }
-                else
-                {
-                    pix_x += image.PixelWidth+10;
-                }
+                pix_x += image.PixelWidth;
+                
             }
 
             SpriteSheetImage.Source = FinalImage;
@@ -187,15 +135,57 @@ namespace KnightPacker
         private void SaveSpriteSheet()
         {
             SaveFileDialog saveFile = new SaveFileDialog();
+            saveFile.Filter = ("Png (*.png)|*.png");
+            XmlDocument doc = new XmlDocument();
+            XmlNode docNode = doc.CreateXmlDeclaration("1.0", "UTF-8", null);
+            doc.AppendChild(docNode);
+
+            XmlNode SpritesNode = doc.CreateElement("sprites");
+            doc.AppendChild(SpritesNode);
+
+            int pix_x = 0;
+            int pix_y = 0;
+            int ID = 0;
+
+            foreach (WriteableBitmap image in Images)
+            {
+                XmlNode spriteNode = doc.CreateElement("sprite");
+                XmlAttribute spriteID = doc.CreateAttribute("id");
+                spriteID.Value = ID.ToString();
+                ID++;
+                spriteNode.Attributes.Append(spriteID);
+                XmlAttribute spriteX = doc.CreateAttribute("x");
+                spriteX.Value = pix_x.ToString();
+                spriteNode.Attributes.Append(spriteX);
+                pix_x += image.PixelWidth;
+                XmlAttribute spriteY = doc.CreateAttribute("y");
+                spriteY.Value = pix_y.ToString();
+                spriteNode.Attributes.Append(spriteY);
+                XmlAttribute spriteWidth = doc.CreateAttribute("width");
+                spriteWidth.Value = image.Width.ToString();
+                spriteNode.Attributes.Append(spriteWidth);
+                XmlAttribute spriteHeight = doc.CreateAttribute("height");
+                spriteHeight.Value = image.Height.ToString();
+                spriteNode.Attributes.Append(spriteHeight);
+                SpritesNode.AppendChild(spriteNode);
+            }
 
             if(saveFile.ShowDialog() == true)
             {
+
                 PngBitmapEncoder encoder = new PngBitmapEncoder();
                 encoder.Frames.Add(BitmapFrame.Create(FinalImage));
 
                 FileStream filestream = new FileStream(saveFile.FileName, FileMode.Create);
                 encoder.Save(filestream);
                 filestream.Close();
+            }
+
+            SaveFileDialog saveDoc = new SaveFileDialog();
+            saveDoc.Filter = "Xml (*.xml)|*.xml";
+            if(saveDoc.ShowDialog() == true)
+            {
+                doc.Save(saveDoc.FileName);
             }
         }
     }
