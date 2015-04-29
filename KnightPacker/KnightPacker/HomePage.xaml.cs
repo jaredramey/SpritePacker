@@ -28,8 +28,6 @@ namespace KnightPacker
         List<WriteableBitmap> Images { set; get; }
         WriteableBitmap FinalImage { set; get; }
         ObservableCollection<string> FilePaths = new ObservableCollection<string>();
-        int prevWidth;
-        int prevHeight;
         
 
         public HomePage()
