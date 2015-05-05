@@ -13,32 +13,55 @@ using System.Xaml;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using KnightPacker;
 using System.Windows.Media.Imaging;
-using System.Windows.Input;
+using System.Windows.Forms;
 
 namespace KnightPacker_UnitTest
 {
     [TestClass]
     public class UnitTest1
     {
+        private Type PackerType;
+        private ConstructorInfo PackerConstructor;
+        private MethodInfo BrowserClick;
+        private MethodInfo CreateSpriteSheet;
+        private MethodInfo SaveSpriteSheet;
+        object Packer;
 
         List<WriteableBitmap> Images { set; get; }
         WriteableBitmap FinalImage { set; get; }
         ObservableCollection<string> FilePaths = new ObservableCollection<string>();
         
+        public UnitTest1()
+        {
+            HomePage newPage = new HomePage();
+
+            PackerType = newPage.GetType();
+
+            //PackerConstructor = PackerType.GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public, null, new Type[] {typeof(object)}, null);
+            PackerConstructor = PackerType.GetConstructor(Type.EmptyTypes);
+
+            Packer = PackerConstructor.Invoke(new object[]{});
+
+            BrowserClick = PackerType.GetMethod("Browser_Click", BindingFlags.Instance | BindingFlags.NonPublic);
+
+            CreateSpriteSheet = PackerType.GetMethod("CreateSpriteSheet", BindingFlags.Instance | BindingFlags.NonPublic);
+
+            SaveSpriteSheet = PackerType.GetMethod("SaveSpriteSheet", BindingFlags.Instance | BindingFlags.NonPublic);
+        }
+
         [TestMethod]
         public void TestMethod1()
         {
             //Arrange
             //*Insert Code to Setup Tests*
-            HomePage Packer = new HomePage();
-            Type t = Packer.GetType();
+            //HomePage Packer = new HomePage();
+            //Type t = Packer.GetType();
+            Button myButton = new Button();
+            RoutedEventArgs myArg = new RoutedEventArgs();
             //Act
             //*Insert Code to call the method property under test*
-            MethodInfo Packer_BrowserClick = t.GetMethod("Browser_Click");
-            
-            //Assert
-            //*Insert code to verify the test compleeted as expected
-            Assert.AreNotEqual(0, FilePaths.Count());
+            MethodInfo Packer_BrowserClick = PackerType.GetMethod("Browser_Click", BindingFlags.Instance | BindingFlags.NonPublic);
+            Packer_BrowserClick.Invoke(Packer, new object[]{myArg});
         }
 
         [TestMethod]
@@ -50,8 +73,8 @@ namespace KnightPacker_UnitTest
             Type t = Packer.GetType();
             //Act
             //*Insert Code to call the method property under test*
-            MethodInfo Packer_BrowserClick = t.GetMethod("CreateSpriteSheet");
-            Assert.AreNotEqual(0, Images.Count());
+            MethodInfo Packer_Create = t.GetMethod("CreateSpriteSheet");
+            //Packer_Create.Invoke(t, null);
         }
 
         [TestMethod]
@@ -63,8 +86,11 @@ namespace KnightPacker_UnitTest
             Type t = Packer.GetType();
             //Act
             //*Insert Code to call the method property under test*
-            MethodInfo Packer_BrowserClick = t.GetMethod("SaveSpriteSheet");
+            MethodInfo Packer_Save = t.GetMethod("SaveSpriteSheet");
+            Packer_Save.Invoke(t, null);
         }
+
+        
     }
 
 }
