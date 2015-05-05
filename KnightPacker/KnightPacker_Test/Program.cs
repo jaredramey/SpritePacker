@@ -64,7 +64,7 @@ namespace KnightPacker_Test
                 int count = 0;
                 AutomationElement aeButton = null;
                 do{
-                    aeButton = aeKnightPacker.FindFirst(TreeScope.Children, new PropertyCondition(AutomationElement.NameProperty, "Browser"));
+                    aeButton = aeKnightPacker.FindFirst(TreeScope.Children, new PropertyCondition(AutomationElement.NameProperty, "ImageListBox"));
                     count++;
                     Thread.Sleep(200);
                 } while (aeButton == null && count < 50);

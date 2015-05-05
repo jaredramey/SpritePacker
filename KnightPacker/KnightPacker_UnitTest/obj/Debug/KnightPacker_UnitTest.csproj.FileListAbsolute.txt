@@ -1,0 +1,10 @@
+C:\Users\jared.ramey\Documents\GitHub\SpritePacker\KnightPacker\KnightPacker_UnitTest\obj\Debug\KnightPacker_UnitTest.csprojResolveAssemblyReference.cache
+C:\Users\jared.ramey\Documents\GitHub\SpritePacker\KnightPacker\KnightPacker_UnitTest\bin\Debug\KnightPacker_UnitTest.dll
+C:\Users\jared.ramey\Documents\GitHub\SpritePacker\KnightPacker\KnightPacker_UnitTest\bin\Debug\KnightPacker_UnitTest.pdb
+C:\Users\jared.ramey\Documents\GitHub\SpritePacker\KnightPacker\KnightPacker_UnitTest\bin\Debug\KnightPacker.exe
+C:\Users\jared.ramey\Documents\GitHub\SpritePacker\KnightPacker\KnightPacker_UnitTest\bin\Debug\WriteableBitmapEx.Wpf.dll
+C:\Users\jared.ramey\Documents\GitHub\SpritePacker\KnightPacker\KnightPacker_UnitTest\bin\Debug\KnightPacker.pdb
+C:\Users\jared.ramey\Documents\GitHub\SpritePacker\KnightPacker\KnightPacker_UnitTest\bin\Debug\WriteableBitmapEx.Wpf.pdb
+C:\Users\jared.ramey\Documents\GitHub\SpritePacker\KnightPacker\KnightPacker_UnitTest\bin\Debug\WriteableBitmapEx.Wpf.xml
+C:\Users\jared.ramey\Documents\GitHub\SpritePacker\KnightPacker\KnightPacker_UnitTest\obj\Debug\KnightPacker_UnitTest.dll
+C:\Users\jared.ramey\Documents\GitHub\SpritePacker\KnightPacker\KnightPacker_UnitTest\obj\Debug\KnightPacker_UnitTest.pdb

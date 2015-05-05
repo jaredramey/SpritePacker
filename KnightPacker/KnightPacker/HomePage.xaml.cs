@@ -18,7 +18,7 @@ using Microsoft.Win32;
 using System.Xml;
 
 
-namespace KnightPacker
+ namespace KnightPacker
 {
     /// <summary>
     /// Interaction logic for HomePage.xaml
@@ -71,7 +71,6 @@ namespace KnightPacker
 
         private void SpriteCreate_Click(object sender, RoutedEventArgs e)
         {
-            //CreateSpriteSheet();
             SaveSpriteSheet();
         }
 

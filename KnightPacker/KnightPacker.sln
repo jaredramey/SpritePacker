@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnightPacker", "KnightPacke
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnightPacker_Test", "KnightPacker_Test\KnightPacker_Test.csproj", "{713C699D-EBFF-4A23-9748-6CF01DA07C5E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnightPacker_UnitTest", "KnightPacker_UnitTest\KnightPacker_UnitTest.csproj", "{E0698341-427D-4BEB-8270-3D8339682AEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnightPackerTests", "KnightPackerTests\KnightPackerTests.csproj", "{E0C2720D-6E2A-4B5D-A095-9CA5E06D838C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{713C699D-EBFF-4A23-9748-6CF01DA07C5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{713C699D-EBFF-4A23-9748-6CF01DA07C5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{713C699D-EBFF-4A23-9748-6CF01DA07C5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0698341-427D-4BEB-8270-3D8339682AEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0698341-427D-4BEB-8270-3D8339682AEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0698341-427D-4BEB-8270-3D8339682AEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0698341-427D-4BEB-8270-3D8339682AEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0C2720D-6E2A-4B5D-A095-9CA5E06D838C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0C2720D-6E2A-4B5D-A095-9CA5E06D838C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0C2720D-6E2A-4B5D-A095-9CA5E06D838C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0C2720D-6E2A-4B5D-A095-9CA5E06D838C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
