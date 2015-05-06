@@ -11,6 +11,7 @@ using System.Reflection;
 using Microsoft.Win32;
 using System.Xaml;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UITest;
 using KnightPacker;
 using System.Windows.Media.Imaging;
 using System.Windows.Forms;
@@ -26,6 +27,7 @@ namespace KnightPacker_UnitTest
         private MethodInfo CreateSpriteSheet;
         private MethodInfo SaveSpriteSheet;
         object Packer;
+        PrivateObject newPageClass = new PrivateObject(typeof(HomePage));
 
         List<WriteableBitmap> Images { set; get; }
         WriteableBitmap FinalImage { set; get; }
@@ -34,6 +36,8 @@ namespace KnightPacker_UnitTest
         public UnitTest1()
         {
             HomePage newPage = new HomePage();
+
+            
 
             PackerType = newPage.GetType();
 
@@ -54,14 +58,15 @@ namespace KnightPacker_UnitTest
         {
             //Arrange
             //*Insert Code to Setup Tests*
-            //HomePage Packer = new HomePage();
-            //Type t = Packer.GetType();
-            Button myButton = new Button();
-            RoutedEventArgs myArg = new RoutedEventArgs();
-            //Act
-            //*Insert Code to call the method property under test*
-            MethodInfo Packer_BrowserClick = PackerType.GetMethod("Browser_Click", BindingFlags.Instance | BindingFlags.NonPublic);
-            Packer_BrowserClick.Invoke(Packer, new object[]{myArg});
+            newPageClass.Invoke("Browser_Click", null, null);
+            ////HomePage Packer = new HomePage();
+            ////Type t = Packer.GetType();
+            //Button myButton = new Button();
+            //RoutedEventArgs myArg = new RoutedEventArgs();
+            ////Act
+            ////*Insert Code to call the method property under test*
+            //MethodInfo Packer_BrowserClick = PackerType.GetMethod("Browser_Click", BindingFlags.Instance | BindingFlags.NonPublic);
+            //Packer_BrowserClick.Invoke(Packer, new object[]{myArg});
         }
 
         [TestMethod]
@@ -90,7 +95,7 @@ namespace KnightPacker_UnitTest
             Packer_Save.Invoke(t, null);
         }
 
-        
+       
     }
 
 }

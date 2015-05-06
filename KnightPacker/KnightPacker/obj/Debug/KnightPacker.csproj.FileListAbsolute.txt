@@ -16,3 +16,4 @@ C:\Users\jared.ramey\Documents\GitHub\SpritePacker\KnightPacker\KnightPacker\obj
 C:\Users\jared.ramey\Documents\GitHub\SpritePacker\KnightPacker\KnightPacker\obj\Debug\KnightPacker.csproj.GenerateResource.Cache
 C:\Users\jared.ramey\Documents\GitHub\SpritePacker\KnightPacker\KnightPacker\obj\Debug\KnightPacker.exe
 C:\Users\jared.ramey\Documents\GitHub\SpritePacker\KnightPacker\KnightPacker\obj\Debug\KnightPacker.pdb
+C:\Users\jared.ramey\Documents\GitHub\SpritePacker\KnightPacker\KnightPacker\obj\Debug\KnightPacker.csprojResolveAssemblyReference.cache

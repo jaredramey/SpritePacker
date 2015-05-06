@@ -8,3 +8,11 @@ C:\Users\jared.ramey\Documents\GitHub\SpritePacker\KnightPacker\KnightPacker_Uni
 C:\Users\jared.ramey\Documents\GitHub\SpritePacker\KnightPacker\KnightPacker_UnitTest\obj\Debug\KnightPacker_UnitTest.csprojResolveAssemblyReference.cache
 C:\Users\jared.ramey\Documents\GitHub\SpritePacker\KnightPacker\KnightPacker_UnitTest\obj\Debug\KnightPacker_UnitTest.dll
 C:\Users\jared.ramey\Documents\GitHub\SpritePacker\KnightPacker\KnightPacker_UnitTest\obj\Debug\KnightPacker_UnitTest.pdb
+C:\Users\jared.ramey\Documents\GitHub\SpritePacker\KnightPacker\KnightPacker_UnitTest\bin\Debug\Microsoft.VisualStudio.TestTools.UITesting.dll
+C:\Users\jared.ramey\Documents\GitHub\SpritePacker\KnightPacker\KnightPacker_UnitTest\bin\Debug\Microsoft.VisualStudio.TestTools.UITest.Extension.dll
+C:\Users\jared.ramey\Documents\GitHub\SpritePacker\KnightPacker\KnightPacker_UnitTest\bin\Debug\Microsoft.VisualStudio.TestTools.UITest.Common.dll
+C:\Users\jared.ramey\Documents\GitHub\SpritePacker\KnightPacker\KnightPacker_UnitTest\bin\Debug\UiaComWrapper.dll
+C:\Users\jared.ramey\Documents\GitHub\SpritePacker\KnightPacker\KnightPacker_UnitTest\bin\Debug\Interop.UIAutomationClient.dll
+C:\Users\jared.ramey\Documents\GitHub\SpritePacker\KnightPacker\KnightPacker_UnitTest\bin\Debug\Microsoft.VisualStudio.TestTools.UITesting.xml
+C:\Users\jared.ramey\Documents\GitHub\SpritePacker\KnightPacker\KnightPacker_UnitTest\bin\Debug\Microsoft.VisualStudio.TestTools.UITest.Extension.xml
+C:\Users\jared.ramey\Documents\GitHub\SpritePacker\KnightPacker\KnightPacker_UnitTest\bin\Debug\Microsoft.VisualStudio.TestTools.UITest.Common.xml
